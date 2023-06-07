@@ -1,0 +1,81 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flower for sita</title>
+    <link rel="stylesheet" href="task.css">
+    <style>
+       
+       h1{
+        margin-bottom: 10%;
+        margin-top: 10%;
+        margin-left: 5%;
+        color: rgb(78, 46, 6);
+       }
+       
+       .button{
+       border-radius: 5px;
+       padding: 10px;
+       padding-left: 15px;
+       padding-right: 15px;
+       background-color: #e8ae70;
+       border: none;
+       margin-left: 30% ;
+      
+     }
+     .button:hover{
+       background-color: rgb(247, 214, 170);
+
+     }
+    </style>
+    <script>
+      const imageFileInput = document.getElementById('image-file');
+const identifyButton = document.getElementById('identify-button');
+
+identifyButton.addEventListener('click', () => {
+  const imageFile = imageFileInput.files[0];
+  if (!imageFile) return;
+
+  const formData = new FormData();
+  formData.append('images', imageFile);
+
+  fetch('https://plant.id/api/v2', {
+    method: 'POST',
+    headers: {
+      'Api-Key': 'k45RqY3MvdJ80aAoWt62tZzyx7XjMnaIPWq5NdUa0UntNTwXlS', // Replace 'YOUR_API_KEY' with your actual Plant.id API key
+    },
+    body: formData,
+  })
+    .then(response => response.json())
+    .then(data => {
+      // Handle the retrieved data
+      console.log(data);
+      // You can perform further operations with the identification data here
+    })
+    .catch(error => {
+      console.log('An error occurred:', error);
+      // Handle error cases here
+    });
+});
+
+    </script>
+  </head>
+  <body>
+    <header class="header"> <nav>
+        <button class="button3" ><a href="./home.html">Home</a></button>
+        <button class="button3"><a href="./gallery.html">Gallery</a></button>
+        <button class="button3"><a href="./find.html">Find Flower</a></button>
+        <button class="button3"><a href="./about.html">Know more</a></button>
+      </nav>
+    </header>
+    <h1>Plant Identifier</h1>
+   <input type="file" id="plantImage" accept="image/*" >
+    <button class="button" onclick="identifyPlant()">Identify Plant</button>
+    <div id="result"></div>
+    <footer class="footer">
+        <p >www.flowerforsita.com</p>
+        
+      </footer>
+  </body>
+</html>
